@@ -1,0 +1,81 @@
+<mat-toolbar class="app-toolbar">
+  <span class="app-title">🛒 Lista del súper</span>
+  <span class="spacer"></span>
+  <span class="pending-badge">{{ productService.pendingCount() }} pendientes</span>
+</mat-toolbar>
+
+<div class="content">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-icon matPrefix>search</mat-icon>
+    <mat-label>Buscar producto</mat-label>
+    <input matInput [formControl]="searchControl" autocomplete="off" placeholder="Ej: leche" />
+  </mat-form-field>
+  <div class="bulk-actions">
+  <button mat-stroked-button (click)="onSelectAll()" [disabled]="!productService.hasPendingProducts()">
+    <mat-icon>done_all</mat-icon>
+    <span class="action-label">Seleccionar todos</span>
+  </button>
+  <button mat-stroked-button (click)="onDeselectAll()" [disabled]="!productService.hasPurchasedProducts()">
+    <mat-icon>remove_done</mat-icon>
+    <span class="action-label">Deseleccionar todos</span>
+  </button>
+  <span class="bulk-spacer"></span>
+  <button
+    mat-stroked-button
+    color="warn"
+    (click)="onClearList()"
+    [disabled]="productService.products().length === 0"
+  >
+    <mat-icon>delete_sweep</mat-icon>
+    <span class="action-label">Limpiar lista</span>
+  </button>
+</div>
+
+  @if (productService.loading()) {
+    <div class="state-message">
+      <mat-spinner diameter="40" />
+    </div>
+  } @else if (productService.products().length === 0) {
+    <div class="state-message">
+      <mat-icon class="state-icon">shopping_cart</mat-icon>
+      <p>No hay productos en la lista todavía.</p>
+    </div>
+  } @else {
+    <div class="product-grid">
+      @for (product of productService.products(); track product.id) {
+        <mat-card class="product-card" [class.purchased]="product.purchased">
+          <mat-card-content>
+            <div class="card-header">
+              <mat-checkbox
+                [checked]="product.purchased"
+                (change)="onTogglePurchased(product)"
+              />
+              <div class="card-title-block">
+                <span class="product-name">{{ product.name }}</span>
+                @if (product.description) {
+                  <span class="product-description">{{ product.description }}</span>
+                }
+              </div>
+              <span class="quantity-chip">x{{ product.quantity }}</span>
+            </div>
+
+            <div class="card-footer">
+                <span class="added-by">Agregado por {{ product.addedBy }}</span>
+                <div class="card-actions">
+                    <button mat-icon-button aria-label="Editar producto" (click)="openEditDialog(product)">
+                    <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Eliminar producto" (click)="onDelete(product)">
+                    <mat-icon>delete_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+  <button mat-fab color="primary" class="fab-add" aria-label="Agregar producto" (click)="openCreateDialog()">
+  <mat-icon>add</mat-icon>
+</button>
+</div>

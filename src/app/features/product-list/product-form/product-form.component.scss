@@ -1,0 +1,14 @@
+.full-width {
+  width: 100%;
+}
+.bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.bulk-spacer {
+  flex: 1 1 auto;
+}

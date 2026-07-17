@@ -1,0 +1,172 @@
+.app-toolbar {
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+  padding-top: env(safe-area-inset-top);
+  height: calc(64px + env(safe-area-inset-top));
+}
+
+.app-title {
+  font: var(--mat-sys-title-large);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.pending-badge {
+  font: var(--mat-sys-label-large);
+  background: var(--mat-sys-secondary-container);
+  color: var(--mat-sys-on-secondary-container);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+}
+
+.search-field {
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: 1rem;
+}
+
+.bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.bulk-spacer {
+  flex: 1 1 auto;
+}
+
+.state-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 4rem 1rem;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.state-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.product-card {
+  border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  &.purchased {
+    opacity: 0.55;
+
+    .product-name {
+      text-decoration: line-through;
+    }
+  }
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.card-title-block {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.product-name {
+  font: var(--mat-sys-title-medium);
+  color: var(--mat-sys-on-surface);
+  overflow-wrap: anywhere;
+}
+
+.product-description {
+  font: var(--mat-sys-body-small);
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.quantity-chip {
+  font: var(--mat-sys-label-large);
+  background: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  color: var(--mat-sys-on-surface-variant);
+  font: var(--mat-sys-body-small);
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.fab-add {
+  position: fixed;
+  bottom: calc(2rem + env(safe-area-inset-bottom));
+  right: 2rem;
+  z-index: 10;
+}
+
+// --- Responsive: pantallas angostas (celulares) ---
+@media (max-width: 480px) {
+  .content {
+    padding: 1rem;
+    padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fab-add {
+    right: 1.25rem;
+  }
+}
+
+// Pantallas muy angostas: los botones masivos pierden el texto y quedan solo el ícono.
+@media (max-width: 420px) {
+  .action-label {
+    display: none;
+  }
+
+  .bulk-actions button {
+    min-width: 0;
+    padding: 0 0.75rem;
+  }
+}

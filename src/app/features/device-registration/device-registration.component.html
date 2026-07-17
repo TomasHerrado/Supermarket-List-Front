@@ -1,0 +1,23 @@
+<div class="registration-page">
+  <div class="registration-card">
+    <h1>¡Bienvenido a SL!</h1>
+    <p>Antes de empezar, contanos cómo te llamás. Así sabemos quién agregó o modificó cada producto.</p>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="name-field">
+        <mat-label>Tu nombre</mat-label>
+        <input matInput formControlName="name" autocomplete="off" placeholder="Ej: Tomás" />
+        @if (form.controls.name.hasError('required') && form.controls.name.touched) {
+          <mat-error>El nombre es obligatorio.</mat-error>
+        }
+        @if (form.controls.name.hasError('minlength') && form.controls.name.touched) {
+          <mat-error>Necesita al menos 2 caracteres.</mat-error>
+        }
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit" class="submit-button">
+        Continuar
+      </button>
+    </form>
+  </div>
+</div>

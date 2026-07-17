@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>{{ isEditing ? 'Editar producto' : 'Agregar producto' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" autocomplete="off" />
+      @if (form.controls.name.hasError('required') && form.controls.name.touched) {
+        <mat-error>El nombre es obligatorio.</mat-error>
+      }
+      @if (form.controls.name.hasError('minlength') && form.controls.name.touched) {
+        <mat-error>Necesita al menos 2 caracteres.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción (opcional)</mat-label>
+      <input matInput formControlName="description" autocomplete="off" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Cantidad</mat-label>
+      <input matInput type="number" formControlName="quantity" min="1" />
+      @if (form.controls.quantity.hasError('min') && form.controls.quantity.touched) {
+        <mat-error>La cantidad mínima es 1.</mat-error>
+      }
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="submitting">
+      {{ isEditing ? 'Guardar' : 'Agregar' }}
+    </button>
+  </mat-dialog-actions>
+</form>

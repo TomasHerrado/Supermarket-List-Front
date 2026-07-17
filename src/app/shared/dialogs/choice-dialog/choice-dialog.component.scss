@@ -1,0 +1,14 @@
+mat-dialog-content {
+  color: var(--mat-sys-on-surface-variant);
+}
+.card-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.fab-add {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10;
+}
