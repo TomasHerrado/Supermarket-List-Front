@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: '/api', // en producción, front y back detrás del mismo dominio/proxy
+  apiUrl: 'https://TU-BACKEND.onrender.com/api', // reemplazar con la URL real
 };
